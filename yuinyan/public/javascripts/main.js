@@ -1,22 +1,250 @@
 var userdata = JSON.parse(window.localStorage.getItem("yn_uuid"));
 
-var stations = [
-        {"num":0,"name":"首里駅","latitude":[26.219223,127.725552]},
-        {"num":1,"name":"儀保駅","latitude":[26.224805,127.718914]},
-        {"num":2,"name":"市立病院駅前","latitude":[26.2274897,127.709942]},
-        {"num":3,"name":"古島駅","latitude":[26.230777,127.702887]},
-        {"num":4,"name":"おもろまち駅","latitude":[26.222833,127.69836]},
-        {"num":5,"name":"安里駅","latitude":[26.217111,127.695944]},
-        {"num":6,"name":"牧志駅","latitude":[26.217306,127.6925]},
-        {"num":7,"name":"美栄橋駅","latitude":[26.219305,127.684389]},
-        {"num":8,"name":"県庁前駅","latitude":[26.214472,127.679362]},
-        {"num":9,"name":"旭橋駅","latitude":[26.212195,127.675584]},
-        {"num":10,"name":"壷川駅","latitude":[26.20589,127.678418]},
-        {"num":11,"name":"奥武山公園駅","latitude":[26.200946,127.675529]},
-        {"num":12,"name":"小禄駅","latitude":[26.196502,127.666669]},
-        {"num":13,"name":"赤嶺駅","latitude":[26.1932346,127.6604804]},
-        {"num":14,"name":"那覇空港駅","latitude":[26.206501,127.651142]}
+    var stations = [
+        {
+            "num":0,
+            "name":"首里駅",
+            "latitude":[26.219223,127.725552],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                },
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                },
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                },
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                }
+            ]
+        },
+        {
+            "num":1,
+            "name":"儀保駅",
+            "latitude":[26.224805,127.718914],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":2,
+            "name":"市立病院駅前",
+            "latitude":[26.2274897,127.709942],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":3,
+            "name":"古島駅",
+            "latitude":[26.230777,127.702887],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":4,
+            "name":"おもろまち駅",
+            "latitude":[26.222833,127.69836],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":5,
+            "name":"安里駅",
+            "latitude":[26.217111,127.695944],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":6,
+            "name":"牧志駅",
+            "latitude":[26.217306,127.6925],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":7,
+            "name":"美栄橋駅",
+            "latitude":[26.219305,127.684389],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":8,
+            "name":"県庁前駅",
+            "latitude":[26.214472,127.679362],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":9,
+            "name":"旭橋駅",
+            "latitude":[26.212195,127.675584],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":10
+            ,"name":"壷川駅",
+            "latitude":[26.20589,127.678418],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":11
+            ,"name":"奥武山公園駅",
+            "latitude":[26.200946,127.675529],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":12
+            ,"name":"小禄駅",
+            "latitude":[26.196502,127.666669],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":13
+            ,"name":"赤嶺駅",
+            "latitude":[26.1932346,127.6604804],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        },
+        {
+            "num":14
+            ,"name":"那覇空港駅",
+            "latitude":[26.206501,127.651142],
+            "tips":[
+                {
+                    "title":"タイトル",
+                    "image":"filename.jpg",
+                    "note":"本文はここに。"
+                    }
+            ]
+        }
     ];
+    
+var Geokit = function(callback) {
+    this.status = undefined;
+    this.result = false;
+    return false;
+}
+
+Geokit.prototype.done = function(pos) {
+this.status = "success";
+console.log(this.status, this);
+console.log("done:", pos, status);
+this.result = pos;
+}
+
+Geokit.prototype.fail = function(a) {
+	this.status = false;
+	alert("airwncはGPS情報を必要とします。このメッセージが表示された場合、リロードして位置情報を許可して下さい。")
+}
+
+Geokit.prototype.get = function(callback,failedCallback) {
+var $this = this;
+navigator.geolocation.getCurrentPosition(
+  function(pos) {
+    $this.done(pos);
+    if(!!callback) callback.call(this);
+  },
+  function(pos) {
+    $this.fail(pos);console.log("failed");
+   failedCallback.call(this);
+  });
+}
+
+var geolocation = new Geokit();
+
+var currentPos = [0,0];
+
+function refreshGeolocation (callback){
+    
+    
+    $("#geolocating").fadeIn();
+    geolocation.get(function(){
+        if(!!callback) callback.call(this);
+        currentPos = [geolocation.result.coords.latitude,geolocation.result.coords.longitude];
+        $("#geolocating").fadeOut();
+    })
+}
+
+refreshGeolocation();
     
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
     // 引数　precision は小数点以下の桁数（距離の精度）
@@ -57,3 +285,10 @@ function restore(uuid){
     }).responseText;
     return JSON.parse(result);
 }
+
+function refreshStationDistance(){
+    $.each(stations,function(){
+        this.distance = geoDistance(this.latitude[0],this.latitude[1],currentPos[0],currentPos[1],5);
+    });
+}
+

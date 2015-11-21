@@ -15,6 +15,25 @@
     <input type="text" id="input-username">
     <a href="#" id="submit">foo</a>
     
+    <select name="" id="station-selector">
+      <option value="0" class="n0">station#0</option>
+      <option value="1" class="n1">station#1</option>
+      <option value="2" class="n2">station#2</option>
+      <option value="3" class="n3">station#3</option>
+      <option value="4" class="n4">station#4</option>
+      <option value="5" class="n5">station#5</option>
+      <option value="6" class="n6">station#6</option>
+      <option value="7" class="n7">station#7</option>
+      <option value="8" class="n8">station#8</option>
+      <option value="9" class="n9">station#9</option>
+      <option value="10" class="n10">station#10</option>
+      <option value="11" class="n11">station#11</option>
+      <option value="12" class="n12">station#12</option>
+      <option value="13" class="n13">station#13</option>
+      <option value="14" class="n14">station#14</option>
+    </select>
+    <a href="#" id="checkin">checkin</a>
+    
     <script>
       $(function(){
          $("#submit").on({"click":function(){
@@ -25,6 +44,25 @@
                 url: "/createuser",
                 data: {
                   "username" : val,
+                },
+                success: function(data){
+                  console.log(data);  
+                  window.localStorage.setItem("yn_uuid",JSON.stringify({"uuid":data._id}));
+                }
+              });
+           }
+         }})
+         
+         
+         $("#checkin").on({"click":function(){
+           var val = $("#station-selector").val();
+           if(!!val && val != ""){
+             $.ajax({
+                type: "POST",
+                url: "/checkin",
+                data: {
+                  "_id" : userdata.uuid,
+                  "stationId" : val
                 },
                 success: function(data){
                   console.log(data);  
