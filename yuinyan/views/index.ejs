@@ -2,10 +2,38 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include _head %>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <!--<form action="/createuser" method="post">
+      <input type="text" name="username"><input type="submit" value="">
+    </form>
+    -->
+    ユーザー名きめてーや。
+    <input type="text" id="input-username">
+    <a href="#" id="submit">foo</a>
+    
+    <script>
+      $(function(){
+         $("#submit").on({"click":function(){
+           var val = $("#input-username").val();
+           if(!!val && val != ""){
+             $.ajax({
+                type: "POST",
+                url: "/createuser",
+                data: {
+                  "username" : val,
+                },
+                success: function(data){
+                  console.log(data);  
+                  window.localStorage.setItem("yn_uuid",JSON.stringify({"uuid":data._id}));
+                }
+              });
+           }
+         }})
+      });
+    </script>
   </body>
 </html>
