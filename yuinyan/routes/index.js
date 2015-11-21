@@ -23,7 +23,12 @@ router.post('/createuser', function(req, res){
     
     MongoClient.connect(mongoPath, function(err, db) {
       assert.equal(null, err);
-      db.collection('user').insertOne( {"username":req.body.username,"checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"currentStation":false},function(err,docsInserted){
+      db.collection('user').insertOne( {
+          "username":req.body.username,
+          "checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          "currentStation":false,
+          "groupId":0
+        },function(err,docsInserted){
         res.json(docsInserted.ops[0]);
         db.close();
       });
@@ -75,7 +80,7 @@ router.post('/addgroup', function(req, res){
       db.collection('user').findOne({"_id":objId},function(data,result){
           
         var checkins = result.checkin;
-        
+
         db.collection('user').update( {"_id":objId}, { $set:{groupId:groupId} } ,function(data,count,result){
           
           //再検索して値を返す。
