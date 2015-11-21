@@ -23,7 +23,7 @@ router.post('/createuser', function(req, res){
     
     MongoClient.connect(mongoPath, function(err, db) {
       assert.equal(null, err);
-      db.collection('user').insertOne( {"username":req.body.username,"checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},function(err,docsInserted){
+      db.collection('user').insertOne( {"username":req.body.username,"checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"currentStation":false},function(err,docsInserted){
         res.json(docsInserted.ops[0]);
         db.close();
       });
@@ -48,20 +48,49 @@ router.post('/checkin', function(req, res){
       var objId = new ObjectID(req.body._id);
       var stationId = parseInt(req.body.stationId);
       db.collection('user').findOne({"_id":objId},function(data,result){
-        console.log(result);
+          
         var checkins = result.checkin;
         
         checkins[stationId]++;
-       
-        db.collection('user').update( {"_id":objId}, { $set:{ checkin: checkins} } ,function(data,count,result){
+        
+        db.collection('user').update( {"_id":objId}, { $set:{ checkin: checkins,currentStation:stationId} } ,function(data,count,result){
           
           //再検索して値を返す。
           db.collection('user').findOne({"_id":objId},function(data,result){
             res.json(result); 
           });
+          
         });
       });
     });
 });
+
+//チェックイン処理
+router.post('/addgroup', function(req, res){
+    
+    MongoClient.connect(mongoPath, function(err, db) {
+      assert.equal(null, err);
+      var objId = new ObjectID(req.body._id);
+      var groupId = parseInt(req.body.groupId);
+      db.collection('user').findOne({"_id":objId},function(data,result){
+          
+        var checkins = result.checkin;
+        
+        db.collection('user').update( {"_id":objId}, { $set:{groupId:groupId} } ,function(data,count,result){
+          
+          //再検索して値を返す。
+          db.collection('user').findOne({"_id":objId},function(data,result){
+            res.json(result); 
+          });
+          
+        });
+      });
+    });
+});
+
+
+
+
+
 
 module.exports = router;
