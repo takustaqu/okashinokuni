@@ -23,7 +23,7 @@ router.post('/createuser', function(req, res){
     
     MongoClient.connect(mongoPath, function(err, db) {
       assert.equal(null, err);
-      db.collection('user').insertOne( {"username":req.body.username,"checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0]},function(err,docsInserted){
+      db.collection('user').insertOne( {"username":req.body.username,"checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},function(err,docsInserted){
         res.json(docsInserted.ops[0]);
         db.close();
       });
@@ -40,6 +40,7 @@ router.post('/getuserdata', function(req, res){
     });
 });
 
+//チェックイン処理
 router.post('/checkin', function(req, res){
     
     MongoClient.connect(mongoPath, function(err, db) {
@@ -51,11 +52,13 @@ router.post('/checkin', function(req, res){
         var checkins = result.checkin;
         
         checkins[stationId]++;
-        
-        console.log(checkins);
-        
-        db.collection('user').update( {"_id":objId}, { $set:{ checkin: checkins} } ,function(data,result){
-          res.json(result);
+       
+        db.collection('user').update( {"_id":objId}, { $set:{ checkin: checkins} } ,function(data,count,result){
+          
+          //再検索して値を返す。
+          db.collection('user').findOne({"_id":objId},function(data,result){
+            res.json(result); 
+          });
         });
       });
     });
