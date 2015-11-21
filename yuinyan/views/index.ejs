@@ -34,6 +34,11 @@
     </select>
     <a href="#" id="checkin">checkin</a>
     
+    
+    <input type="text" id="groupId">
+    <a href="#" id="addGroup">addGroup</a>
+    
+    
     <script>
       $(function(){
          $("#submit").on({"click":function(){
@@ -63,6 +68,24 @@
                 data: {
                   "_id" : userdata.uuid,
                   "stationId" : val
+                },
+                success: function(data){
+                  console.log(data);
+                }
+              });
+           }
+         }})
+         
+         
+         $("#addGroup").on({"click":function(){
+           var val = $("#groupId").val();
+           if(!!val && val != ""){
+             $.ajax({
+                type: "POST",
+                url: "/addgroup",
+                data: {
+                  "_id" : userdata.uuid,
+                  "groupId" : val
                 },
                 success: function(data){
                   console.log(data);
