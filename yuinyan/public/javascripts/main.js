@@ -200,18 +200,27 @@ var userdata = JSON.parse(window.localStorage.getItem("yn_uuid"));
     
 var $stations = $("<ul />").addClass("stations");
 var $distances = [];
+var $stationLabels = [];
 
-$.each(stations,function(i){
-    $distances[i] = $("<span />").text(0);
-    var $tmp = $("<li />").attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
-        '<span class="buddy"></span><span class="station-circle"></span><span class="station-name">'+ this.name +'</span><span class="distance"></span>');
-        
-        $tmp.find(".distance").prepend($distances[i]);
-        
-       $stations.append($tmp);
-});
+
 
 $(function(){
+    
+    $.each(stations,function(i){
+        $distances[i] = $("<span />").text(0);
+        
+        var $tmp = $("<li />").attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
+            '<span class="buddy"></span><span class="station-circle"></span><span class="station-name">'+ this.name +'</span><span class="distance"></span>');
+            
+        $stationLabels.push($tmp);
+            
+        $tmp.find(".distance").prepend($distances[i]);
+        $stations.prepend($tmp);
+        
+        $("#initial-station").prepend($("<option>").text(this.name).attr({"value":i}));
+    });
+    $("#initial-station").val(0);
+
     $("#railway").append($stations);
 })
     
@@ -251,8 +260,6 @@ var geolocation = new Geokit();
 var currentPos = [0,0];
 
 function refreshGeolocation (callback){
-    
-    
     $("#geolocating").fadeIn();
     geolocation.get(function(){
         if(!!callback) callback.call(this);
@@ -262,6 +269,10 @@ function refreshGeolocation (callback){
 }
 
 refreshGeolocation();
+
+function refreshUserstatus (){
+    
+}
     
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
     // 引数　precision は小数点以下の桁数（距離の精度）
@@ -303,6 +314,14 @@ function restore(uuid){
     return JSON.parse(result);
 }
 
+
+setInterval(function(){
+    refreshGeolocation();
+},5000);
+
+setInterval(function(){
+  refreshStationDistance();  
+},1000)
 function refreshStationDistance(){
     $.each(stations,function(i){
         this.distance = geoDistance(this.latitude[0],this.latitude[1],currentPos[0],currentPos[1],0);
@@ -312,6 +331,12 @@ function refreshStationDistance(){
             $distances[i].text(this.distance).removeClass("kilometer");
         }
         
+        if(this.distance < 150){
+            $stationLabels[i].addClass("near");    
+        }else{
+            $stationLabels[i].removeClass("near");
+        }
+         
     });
 }
 
@@ -336,8 +361,10 @@ $(function(){
         },
         success: function(data){
             console.log(data);  
-            window.localStorage.setItem("yn_uuid",JSON.stringify({"uuid":data._id}));
+            window.localStorage.setItem("yn_uuid",JSON.stringify({"uuid":data._id,"groupId":data.groupId}));
             window.userdata = {"uuid":data._id};
+            
+            if(!!data.groupId) window.userdata.groupId = data.groupId;
             $("#createuser").slideUp();
         }
         });
