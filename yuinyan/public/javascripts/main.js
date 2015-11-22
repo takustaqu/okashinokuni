@@ -410,7 +410,7 @@ function restore(){
         
         $.each(groupData,function(){
             $groupPlayers.append(
-                $("<li />").html('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar type'+( '0'+this.groupId ).slice(-2)+'"><span class="name">'+this.username+'</span>')
+                $("<li />").html('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar type'+( '0'+this.facial ).slice(-2)+'"><span class="name">'+this.username+'</span>')
             );
             var current = this.currentStation;
             var groupId = this.groupId;

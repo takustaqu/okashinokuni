@@ -574,3 +574,17 @@ header#global {
 	z-index:2000;	
 }
 
+
+
+.group-players {
+	li {
+		display:inline-block;
+		width:50%;
+		font-weight:bold;
+		text-align:Center;
+		img {
+			display:block;
+			margin:8px auto;
+		}
+	}
+}
