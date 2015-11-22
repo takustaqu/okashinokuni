@@ -483,9 +483,74 @@ header#global {
 	background-size: contain;
 	border-radius:100%;
 
+					
 	&.type01{
-		background-color: red;
+		background-color:#00b3e6;
 		background-image: url(/images/avatar01.png);
+	}
+	&.type02{
+		background-color:#80cc26;
+		background-image: url(/images/avatar02.png);
+	}
+	&.type03{
+		background-color:#ffd308;
+		background-image: url(/images/avatar03.png);
+	}
+	&.type04{
+		background-color:#ff7608;
+		background-image: url(/images/avatar04.png);
+	}
+	&.type05{
+		background-color:#d90000;
+		background-image: url(/images/avatar05.png);
+	}
+	&.type06{
+		background-color:#00b3e6;
+		background-image: url(/images/avatar06.png);
+	}
+	&.type07{
+		background-color:#80cc26;
+		background-image: url(/images/avatar07.png);
+	}
+	&.type08{
+		background-color:#ffd308;
+		background-image: url(/images/avatar08.png);
+	}
+	&.type09{
+		background-color:#ff7608;
+		background-image: url(/images/avatar09.png);
+	}
+}
+
+.buddy {
+	>span {
+		&.type01{
+		color:#00b3e6;
+		}
+		&.type02{
+			color:#80cc26;
+		}
+		&.type03{
+			color:#ffd308;
+		}
+		&.type04{
+			color:#ff7608;
+		}
+		&.type05{
+			color:#d90000;
+		}
+		&.type06{
+			color:#00b3e6;
+		}
+		&.type07{
+			color:#80cc26;
+		}
+		&.type08{
+			color:#ffd308;
+		}
+		&.type09{
+			color:#ff7608;
+		}
 	}
 }
 

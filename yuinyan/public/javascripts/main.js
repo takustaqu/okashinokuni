@@ -375,6 +375,7 @@ function restore(){
     // if(!data ||r !data.name) return false;
     console.log(data);
     $("#dashboard h1 .name").text(data.username);
+    $("#dashboard h1 img").removeClass().addClass("avatar type"+(("0"+data.facial).slice(-2)));
     
     var checked = calcCheckedStation(data.checkin);
     $("#counter .number").text(checked.stations - checked.checked);
@@ -403,6 +404,7 @@ function restore(){
         $("#group-detail .group-id").text("グループID:"+data.groupId); 
         
         var groupData = getGroupsFromGid(data.groupId);
+        var facial = data.facial;
         
         $groupPlayers.empty();
         
@@ -415,7 +417,7 @@ function restore(){
             
             $stations.children("li").each(function(i){
                 if(parseInt($(this).attr("data-station-id")) == current){
-                    $(this).find(".buddy").append($("<span />").addClass('type'+( '0'+groupId ).slice(-2)).text("●"))
+                    $(this).find(".buddy").append($("<span />").addClass('type'+( '0'+facial ).slice(-2)).text("●"))
                 }
             });
              
