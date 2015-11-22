@@ -335,3 +335,9 @@ header#global {
 		background-image: url(/images/avatar01.png);
 	}
 }
+
+#groupId , #getfromgroupId {
+	z-index:4000;
+	position: relative;
+	display: none;
+}

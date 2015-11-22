@@ -199,6 +199,7 @@ var userdata = JSON.parse(window.localStorage.getItem("yn_uuid"));
     ];
     
 var $stations = $("<ul />").addClass("stations");
+var $groupPlayers = $("<ul />").addClass("group-players");
 var $distances = [];
 var $stationLabels = [];
 
@@ -348,16 +349,13 @@ function restore(){
     $("#counter .number").text(checked.stations - checked.checked);
     
     $stations.children("li").each(function(i){
-        
-        console.log(i,data.checkin[i],this)
+       
         if(data.checkin[i]>0){
-            console.log("チェック対象",i)
             $(this).addClass("checked");
         }else{
             $(this).removeClass("checked").find(".station-circle").html("");
         }
         if(data.checkin[i]>1){
-            console.log("チェック対象-複数カウント",i)
             $(this).find(".station-circle").html('<span>'+data.checkin[i]+'</span>');
         }
     })
@@ -367,6 +365,15 @@ function restore(){
         $("#group-detail .group-id").text("グループID:"+data.groupId); 
         
         var groupData = getGroupsFromGid(data.groupId);
+        
+        $groupPlayers.empty();
+        
+        $.each(groupData,function(){
+            $groupPlayers.append(
+                $("<li />").html('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar type'+( '0'+this.groupId ).slice(-2)+'"><span class="name">'+this.username+'</span>')
+            );
+            
+        });
         
         var $group = $("<ul />")
     }
@@ -407,6 +414,8 @@ $(function(){
         $("#createuser").slideUp();
         restore();
     }
+    
+    $("#group-detail").append($groupPlayers);
     
     $("#submit").on({"click":function(){
     var val = $("#input-username").val();
