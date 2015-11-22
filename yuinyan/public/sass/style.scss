@@ -76,7 +76,7 @@ header#global {
 		left center ,
 		right center ,
 		center center;
-	background-repeat:no-repeat;
+	background-repeat:no-repeat , no-repeat, no-repeat, repeat;
 	
 	position: fixed;
 	top:0;left:0;
@@ -136,6 +136,19 @@ header#global {
 				transition:transform 1.8s cubic-bezier(0.07, 1.66, 0.27, 0.96) 0s , opacity 0.2s linear;
 			}
 		}
+		
+		.buddy {
+			position: absolute;
+			width:$leftShift;
+			left:0;
+			height:$circleSize;
+			line-height:$circleSize;
+			letter-spacing:-8px;
+			text-align:Center;
+			> span {
+				display:inline;
+			}
+		} 
 		
 		&.current {
 			.station-circle {
@@ -247,6 +260,20 @@ header#global {
 
 
 #dashboard {
+	
+	h1 {
+		text-align:center;
+		padding:20px 0;
+		font-weight:bold;
+		color:#666;
+		// border-bottom:1px dotted #EEE;
+		// margin-bottom:16px;
+		
+		img {
+			display: block;
+			margin:0 auto 8px auto;
+		}
+	}
 	#counter {
 		display: block;
 		width:110px;
@@ -265,5 +292,42 @@ header#global {
 			font-size:55px;
 		}
 	}
+	
+	#group-detail {
+		
+	}
+	
+	.group-info {
+		width:85%;
+		margin: 16px auto;
+		span {
+			display: block;
+			text-align:Center;
+			padding:4px 0;
+			&.title {
+				background-color: #666;
+				font-weight:bold;
+				color:#FFF;
+			}
+			
+			&.group-id {
+				background-color: #EEE;
+				color:#666;
+			}
+			
+		}
+	}
+}
 
+
+.avatar {
+	width:60px;
+	height:60px;
+	background-size: contain;
+	border-radius:100%;
+
+	&.type01{
+		background-color: red;
+		background-image: url(/images/avatar01.png);
+	}
 }

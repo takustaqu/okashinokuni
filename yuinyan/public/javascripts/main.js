@@ -210,7 +210,7 @@ $(function(){
         $distances[i] = $("<span />").text(0);
         
         var $tmp = $("<li />").attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
-            '<span class="buddy"></span><span class="station-circle"></span><span class="station-name">'+ this.name +'</span><span class="distance"></span>');
+            '<span class="buddy"><span style="color:red">●</span><span style="color:green">●</span><span style="color:blue">●</span></span><span class="station-circle"></span><span class="station-name">'+ this.name +'</span><span class="distance"></span>');
             
         $stationLabels.push($tmp);
             
