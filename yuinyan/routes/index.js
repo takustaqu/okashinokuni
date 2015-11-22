@@ -5,7 +5,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var assert = require('assert')
-var mongoPath = 'mongodb://MongoLab-l:d1_z7PpKf_TaNrQzWDFtpL17oiQKhUIIop_N00HKVZE-@ds054118.mongolab.com:54118/MongoLab-l';
+var mongoPath = 'mongodb://localhost:27017/yuinyan';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -47,6 +47,7 @@ router.post('/getuserdata', function(req, res){
     MongoClient.connect(mongoPath, function(err, db) {
       assert.equal(null, err);
       db.collection('user').findOne({"_id":new ObjectID(req.body._id)},function(data,result){
+        console.log(result)
         res.json(result);
       });
     });

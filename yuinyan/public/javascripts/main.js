@@ -304,6 +304,7 @@ function confirmDiceValue(int){
     
     $("#diceboard").slideUp();
 }
+
     
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
     // 引数　precision は小数点以下の桁数（距離の精度）
@@ -372,7 +373,7 @@ function restore(){
     
     var data = getDataFromUuid(userdata.uuid);
     // if(!data ||r !data.name) return false;
-    
+    console.log(data);
     $("#dashboard h1 .name").text(data.username);
     
     var checked = calcCheckedStation(data.checkin);
@@ -494,6 +495,14 @@ $(function(){
         }
          
      }})
+     
+     $("#status .throwdice a").on({"click":function(){
+         $("#diceboard").slideDown
+        
+         
+     }})
+     
+
     $("#do-dice").on({"click":function(){
         var dicepos = [1,2,3,4,5,6];
         var i=1;
