@@ -566,6 +566,7 @@ header#global {
 }
 
 #diceboard {
+  display:none;
 	height: calc(100% - #{$headerSize});
 	width:100%;
 	top:$headerSize;
@@ -590,6 +591,7 @@ header#global {
 }
 
     #checkin_modal{
+      display:none;
       box-sizing:border-box;
       position: fixed;
       overflow-y: scroll;
