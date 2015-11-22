@@ -240,7 +240,7 @@ this.result = pos;
 
 Geokit.prototype.fail = function(a) {
 	this.status = false;
-	alert("airwncはGPS情報を必要とします。このメッセージが表示された場合、リロードして位置情報を許可して下さい。")
+	alert("GPS情報を必要とします。このメッセージが表示された場合、リロードして位置情報を許可して下さい。");
 }
 
 Geokit.prototype.get = function(callback,failedCallback) {
@@ -299,6 +299,8 @@ function confirmDiceValue(int){
     $stations.children("li").eq(target1).addClass("target")
     $stations.children("li").eq(target2).addClass("target")
     
+    
+    $("#status").removeClass().addClass("moving");
     
     $("#diceboard").slideUp();
 }
@@ -389,7 +391,7 @@ function restore(){
         }
         
         if(parseInt($(this).attr("data-station-id")) == data.currentStation){
-            $(this).addClass("current")
+            $(this).addClass("current");
         }
         
         $(this).find(".buddy").empty();
@@ -430,6 +432,7 @@ setInterval(function(){
   refreshStationDistance();  
 },1000)
 function refreshStationDistance(){
+    $("#status").removeClass("ready");
     $.each(stations,function(i){
         this.distance = geoDistance(this.latitude[0],this.latitude[1],currentPos[0],currentPos[1],0);
         if(this.distance > 1000){
@@ -439,7 +442,13 @@ function refreshStationDistance(){
         }
         
         if(this.distance < 150){
-            $stationLabels[i].addClass("near");    
+            $stationLabels[i].addClass("near");
+            if($stationLabels[i].hasClass("target")){
+                $("#status").addClass("ready");
+                
+                $("#status .checkin a").attr("data-target-id",$stationLabels[i].attr('data-station-id'))
+            }
+            
         }else{
             $stationLabels[i].removeClass("near");
         }
@@ -457,7 +466,34 @@ $(function(){
     }
    
     
-    console.log("foo",$("#do-dice"));
+     $("#status .checkin a").on({"click":function(){
+         
+         var targetId = parseInt($(this).attr("data-target-id"));
+         console.log(targetId);
+        if($("#status").hasClass("moving") && $("#status").hasClass("ready")){
+            var targetId = parseInt($(this).attr("data-target-id"));
+           
+           (function(){
+                var result = $.ajax({
+                type: "POST",
+                url: "/checkin",
+                data: {
+                "_id" : userdata.uuid,
+                "stationId" :targetId 
+                },
+                async: false
+                }).responseText;
+                return JSON.parse(result);
+           })()
+           
+           restore()
+           $stations.children("li").removeClass("target").addClass("waiting");
+           $("#status").removeClass("moving").removeClass("ready")
+        }else{
+            return false;
+        }
+         
+     }})
     $("#do-dice").on({"click":function(){
         var dicepos = [1,2,3,4,5,6];
         var i=1;
