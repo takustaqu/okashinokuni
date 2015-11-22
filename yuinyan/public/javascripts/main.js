@@ -371,7 +371,7 @@ function calcCheckedStation(list){
 function restore(){
     
     var data = getDataFromUuid(userdata.uuid);
-    console.log(data,data.name);
+    // if(!data ||r !data.name) return false;
     
     $("#dashboard h1 .name").text(data.username);
     
