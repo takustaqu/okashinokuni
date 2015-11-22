@@ -1,0 +1,12 @@
+body
+{
+	width: 100%;
+	height: 100%;
+}
+a img{
+	border: none;
+}
+body div{
+	text-align: right;
+	margin-top: 400px;
+}
