@@ -2,10 +2,65 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include _head %>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    
+    <div id="createuser">
+      ユーザー名きめてーや。
+      <input type="text" id="input-username">
+      <input type="number" id="input-init-groupId">
+      
+      <ul class="facial-select">
+        <li><input type="radio" name="facial-icon" value="0"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="1"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="2"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="3"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="4"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="5"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="6"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="7"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="8"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="9"><img src="#"></li>
+      </ul>
+      
+      <select name="#" id="initial-station"></select>
+      
+      <a href="#" id="submit">はじめる</a>
+     
+    </div>
+    
+    <div id="railway">
+      
+    </div>
+    
+    
+    
+    
+    <select name="" id="station-selector">
+      <option value="0" class="n0">station#0</option>
+      <option value="1" class="n1">station#1</option>
+      <option value="2" class="n2">station#2</option>
+      <option value="3" class="n3">station#3</option>
+      <option value="4" class="n4">station#4</option>
+      <option value="5" class="n5">station#5</option>
+      <option value="6" class="n6">station#6</option>
+      <option value="7" class="n7">station#7</option>
+      <option value="8" class="n8">station#8</option>
+      <option value="9" class="n9">station#9</option>
+      <option value="10" class="n10">station#10</option>
+      <option value="11" class="n11">station#11</option>
+      <option value="12" class="n12">station#12</option>
+      <option value="13" class="n13">station#13</option>
+      <option value="14" class="n14">station#14</option>
+    </select>
+    <a href="#" id="checkin">checkin</a>
+    
+    
+    <input type="text" id="groupId">
+    <a href="#" id="addGroup">addGroup</a>
+    <a href="#" id="getfromgroupId">groupIdから取得</a>
+       
   </body>
 </html>
