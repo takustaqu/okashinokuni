@@ -1,0 +1,88 @@
+body {
+  width: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  perspective: 200px;
+    -webkit-perspective: 200px;
+}
+
+.test {
+  width: 1px;
+  height: 1px;
+    margin: 200px auto;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+    border: 5px solid red;
+  position: relative;
+}
+
+.dice {
+    width: 100px;
+  height: 100px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 2px solid gray;
+  position: absolute;
+  left: calc(-100px / 2);
+  top: calc(-100px / 2);
+  text-align: center;
+  line-height: 100px;
+}
+
+/* 面個別CSS */
+#one {
+   transform:
+    translateZ(calc(100px / 2));
+  -webkit-transform:
+    translateZ(calc(100px / 2));
+}
+#two {
+  transform:
+   transform:
+   translateY(calc(100px / 2)) rotateX(-90deg) ;
+  -webkit-transform:
+   translateY(calc(100px / 2)) rotateX(-90deg) ;
+}
+#three {
+  transform: 
+    translateX(calc(100px / 2)) rotateY(90deg);
+  -webkit-transform: 
+    translateX(calc(100px / 2)) rotateY(90deg);
+}
+#four {
+  transform:
+    translateX(calc(-100px / 2)) rotateY(-90deg);
+  -webkit-transform:
+    translateX(calc(-100px / 2)) rotateY(-90deg);
+}
+#five{
+  transform:
+    translateY(calc(-100px / 2)) rotateX(90deg);
+  -webkit-transform:
+    translateY(calc(-100px / 2)) rotateX(90deg);
+}
+#six{
+  transform:
+   translateZ(calc(-100px / 2)) rotateY(180deg);
+  -webkit-transform:
+   translateZ(calc(-100px / 2)) rotateY(180deg);
+}
+
+/* アニメーション */
+.test {
+  animation: rotation 1s linear 0s 2 normal;
+  -webkit-animation: rotation 1s linear 0s 2 normal;
+}
+
+/* キーフレーム */
+@keyframes rotation{
+    100%{
+    transform:
+      rotateX(360deg) rotateY(360deg);
+  }
+}
+@-webkit-keyframes rotation{
+    100%{
+    -webkit-transform:
+      rotateX(360deg) rotateY(360deg);
+  }
+}
