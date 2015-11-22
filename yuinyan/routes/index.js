@@ -5,7 +5,7 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var assert = require('assert')
-var mongoPath = 'mongodb://localhost:27017/yuinyan';
+var mongoPath = 'mongodb://MongoLab-l:d1_z7PpKf_TaNrQzWDFtpL17oiQKhUIIop_N00HKVZE-@ds054118.mongolab.com:54118/MongoLab-l';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
