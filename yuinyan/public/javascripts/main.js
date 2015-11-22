@@ -348,10 +348,9 @@ function restore(){
     var checked = calcCheckedStation(data.checkin);
     $("#counter .number").text(checked.stations - checked.checked);
     
-    
-    
+
     $($stations.children("li").get().reverse()).each(function(i){
-       
+       $(this).removeClass("current")
         if(data.checkin[i]>0){
             $(this).addClass("checked");
         }else{
@@ -359,6 +358,10 @@ function restore(){
         }
         if(data.checkin[i]>1){
             $(this).find(".station-circle").html('<span>'+data.checkin[i]+'</span>');
+        }
+        
+        if(parseInt($(this).attr("data-station-id")) == data.currentStation){
+            $(this).addClass("current")
         }
         
         $(this).find(".buddy").empty();
@@ -425,6 +428,8 @@ $(function(){
         $("#createuser").slideUp();
         restore();
     }
+    
+    $("#status").addClass("wait");
     
     $("#group-detail").append($groupPlayers);
     
