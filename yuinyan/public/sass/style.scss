@@ -1,0 +1,125 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+ 
+.stations {
+	
+	li {
+		span {
+			vertical-align: middle;
+		}
+		
+		.station-circle {
+			box-sizing:border-box;
+			display:inline-block;
+			border:7px solid #666;
+			width:35px;
+			height:35px;
+			border-radius:100%;
+			margin-right:0.5em;
+		}
+		
+		&.current {
+			.station-circle {
+				border-color:red;
+			}
+		}
+		
+		padding:8px 0;
+	}
+  
+  
+  
+  .station-name {
+	  font-weight:bold;
+	  
+  }
+  
+  .distance {
+	  font-size:80%;
+		> span{
+		
+		}
+		
+		> span:after{
+			content:"m)";
+		}
+		
+		> span.kilometer:after{
+			content:"km)";
+		}
+		
+		> span:before{
+			content:"(";
+		}
+	
+	}
+}
+
+.stations li.current{
+  font-weight:bold;
+}
+
+
+
+
+#createuser {
+	box-sizing:border-box;
+	position: fixed;
+	padding:10px;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(255,255,255,0.9);
+	z-index:1000;
+	
+	display:none;
+}
+
+
+.facial-select {
+	$iconsize : 64px;
+	li {
+		display:inline-block;
+		width:$iconsize;
+		height:$iconsize;
+		background-color: #ccc;
+		position: relative;
+		
+		input ,img {
+			width:$iconsize;
+			height:$iconsize;
+			display:block;
+		}
+		
+		input {	
+			position:absolute;
+			left:0;
+			top:0;
+			border-radius:100%;
+			border:1px solid #333;
+			opacity:0;
+		}
+		
+		input[type=radio]:checked+img {
+			background-color: red;
+		}
+	}
+}
+

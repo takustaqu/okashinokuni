@@ -204,7 +204,7 @@ var $distances = [];
 $.each(stations,function(i){
     $distances[i] = $("<span />").text(0);
     var $tmp = $("<li />").attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
-        '<span class="station-name">'+ this.name +'</span><span class="distance"></span>');
+        '<span class="buddy"></span><span class="station-circle"></span><span class="station-name">'+ this.name +'</span><span class="distance"></span>');
         
         $tmp.find(".distance").prepend($distances[i]);
         
@@ -320,16 +320,25 @@ function refreshStationDistance(){
 $(function(){
     $("#submit").on({"click":function(){
     var val = $("#input-username").val();
+    var facial = $("input[name=facial-icon]:checked").val();
+    var group = $("#input-init-groupId").val();
+    
+    console.log(group);
+    
     if(!!val && val != ""){
         $.ajax({
         type: "POST",
         url: "/createuser",
         data: {
             "username" : val,
+            "facial":facial,
+            "groupId":group
         },
         success: function(data){
             console.log(data);  
             window.localStorage.setItem("yn_uuid",JSON.stringify({"uuid":data._id}));
+            window.userdata = {"uuid":data._id};
+            $("#createuser").slideUp();
         }
         });
     }

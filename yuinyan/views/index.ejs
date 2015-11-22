@@ -5,20 +5,34 @@
     <% include _head %>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <!--<form action="/createuser" method="post">
-      <input type="text" name="username"><input type="submit" value="">
-    </form>
-    -->
+    
+    <div id="createuser">
+      ユーザー名きめてーや。
+      <input type="text" id="input-username">
+      <input type="number" id="input-init-groupId">
+      
+      <ul class="facial-select">
+        <li><input type="radio" name="facial-icon" value="0"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="1"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="2"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="3"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="4"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="5"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="6"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="7"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="8"><img src="#"></li>
+        <li><input type="radio" name="facial-icon" value="9"><img src="#"></li>
+      </ul>
+      
+      <a href="#" id="submit">はじめる</a>
+     
+    </div>
     
     <div id="railway">
       
     </div>
     
-    ユーザー名きめてーや。
-    <input type="text" id="input-username">
-    <a href="#" id="submit">foo</a>
+    
     
     
     <select name="" id="station-selector">
@@ -44,40 +58,6 @@
     <input type="text" id="groupId">
     <a href="#" id="addGroup">addGroup</a>
     <a href="#" id="getfromgroupId">groupIdから取得</a>
-    
-    
-   <style>
-     
-     .stations {
        
-     }
-     
-     .stations li.current{
-       font-weight:bold;
-     }
-     
-     
-     .distance {
-       
-     }
-     
-     .distance > span{
-       
-     }
-     
-     .distance > span:after{
-       content:"m)";
-     }
-     
-     .distance > span.kilometer:after{
-       content:"km)";
-     }
-     
-     .distance > span:before{
-       content:"(";
-     }
-     
-   </style>
-   
   </body>
 </html>

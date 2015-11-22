@@ -23,11 +23,19 @@ router.post('/createuser', function(req, res){
     
     MongoClient.connect(mongoPath, function(err, db) {
       assert.equal(null, err);
-      db.collection('user').insertOne( {
+      
+      var payload = {
           "username":req.body.username,
           "checkin":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-          "currentStation":false
-        },function(err,docsInserted){
+          "currentStation":false,
+          "facial":req.body.facial
+        }
+        
+      if(!!req.body.groupId && req.body.groupId != ""){
+        payload.groupId = parseInt(req.body.groupId);
+      }
+      
+      db.collection('user').insertOne(payload,function(err,docsInserted){
         res.json(docsInserted.ops[0]);
         db.close();
       });
