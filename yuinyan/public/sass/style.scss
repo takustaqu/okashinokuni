@@ -143,6 +143,7 @@ header#global {
 
 	box-sizing:border-box;
 	padding-left:$leftShift;
+	padding-top:60px;
 
 	&:before {
 		display: block;
@@ -215,6 +216,38 @@ header#global {
 				border-radius: 100%;
 			}
 		}
+		
+		&.station-id-14 , &.station-id-13 , &.station-id-12 {
+			& .station-circle {
+				border-color:#00b3e6;	
+			}
+		}
+		
+		&.station-id-11 , &.station-id-10 , &.station-id-9 {
+			& .station-circle {
+				border-color:#80cc26;	
+			}
+		}
+		
+		&.station-id-8 , &.station-id-7 , &.station-id-6 {
+			& .station-circle {
+				border-color:#ffd308;	
+			}
+		}
+		
+		&.station-id-5 , &.station-id-4 , &.station-id-3 {
+			& .station-circle {
+				border-color:#ff7608;	
+			}
+		}
+		
+		&.station-id-2 , &.station-id-1 , &.station-id-0 {
+			& .station-circle {
+				border-color:#d90000;	
+			}
+		}
+		
+		
 
 		.buddy {
 			position: absolute;

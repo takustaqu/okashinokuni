@@ -277,7 +277,10 @@ function refreshUserstatus (){
 
 function confirmDiceValue(int){
     
+    
     var index = $stations.children(".current").index();
+    
+    $stations.children("li").removeClass("target");
     
     var target1 = index - int;
     var target2 = index + int;
@@ -286,12 +289,15 @@ function confirmDiceValue(int){
         target1 = target1 *-1
     }
     
-    if(target2 > ($stations.length-1)){
-        target2 = (target2 - ($stations.length-1))*-1
+    console.log(target2 , $stations.children("li").length);
+    if(target2 >= $stations.children("li").length){
+        target2 = ($stations.children("li").length -2) - ($stations.children("li").length-target2);
     }
     
-    $stations.children("li").eq(target1).addClass("target target1")
-    $stations.children("li").eq(target2).addClass("target target2")
+    console.log(target1 , target2)
+    
+    $stations.children("li").eq(target1).addClass("target")
+    $stations.children("li").eq(target2).addClass("target")
     
     
     $("#diceboard").slideUp();
