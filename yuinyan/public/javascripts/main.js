@@ -198,6 +198,23 @@ var userdata = JSON.parse(window.localStorage.getItem("yn_uuid"));
         }
     ];
     
+var $stations = $("<ul />").addClass("stations");
+var $distances = [];
+
+$.each(stations,function(i){
+    $distances[i] = $("<span />").text(0);
+    var $tmp = $("<li />").attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
+        '<span class="station-name">'+ this.name +'</span><span class="distance"></span>');
+        
+        $tmp.find(".distance").prepend($distances[i]);
+        
+       $stations.append($tmp);
+});
+
+$(function(){
+    $("#railway").append($stations);
+})
+    
 var Geokit = function(callback) {
     this.status = undefined;
     this.result = false;
@@ -287,8 +304,14 @@ function restore(uuid){
 }
 
 function refreshStationDistance(){
-    $.each(stations,function(){
-        this.distance = geoDistance(this.latitude[0],this.latitude[1],currentPos[0],currentPos[1],5);
+    $.each(stations,function(i){
+        this.distance = geoDistance(this.latitude[0],this.latitude[1],currentPos[0],currentPos[1],0);
+        if(this.distance > 1000){
+            $distances[i].text(Math.floor(this.distance/100)/10).addClass("kilometer");    
+        }else{
+            $distances[i].text(this.distance).removeClass("kilometer");
+        }
+        
     });
 }
 
