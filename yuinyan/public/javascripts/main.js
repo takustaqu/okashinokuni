@@ -274,6 +274,28 @@ refreshGeolocation();
 function refreshUserstatus (){
     
 }
+
+function confirmDiceValue(int){
+    
+    var index = $stations.children(".current").index();
+    
+    var target1 = index - int;
+    var target2 = index + int;
+    
+    if(target1<0){
+        target1 = target1 *-1
+    }
+    
+    if(target2 > ($stations.length-1)){
+        target2 = (target2 - ($stations.length-1))*-1
+    }
+    
+    $stations.children("li").eq(target1).addClass("target target1")
+    $stations.children("li").eq(target2).addClass("target target2")
+    
+    
+    $("#diceboard").slideUp();
+}
     
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
     // 引数　precision は小数点以下の桁数（距離の精度）
@@ -383,7 +405,6 @@ function restore(){
             var groupId = this.groupId;
             
             $stations.children("li").each(function(i){
-                console.log(parseInt($(this).attr("data-station-id")) , current);
                 if(parseInt($(this).attr("data-station-id")) == current){
                     $(this).find(".buddy").append($("<span />").addClass('type'+( '0'+groupId ).slice(-2)).text("●"))
                 }
@@ -424,10 +445,33 @@ function refreshStationDistance(){
 
 $(function(){
     
-    if(!!userdata.uuid) {//ユーザーデータがある場合はサインアップをキャンセル
+    if(!!userdata && !!userdata.uuid) {//ユーザーデータがある場合はサインアップをキャンセル
         $("#createuser").slideUp();
         restore();
     }
+   
+    
+    console.log("foo",$("#do-dice"));
+    $("#do-dice").on({"click":function(){
+        var dicepos = [1,2,3,4,5,6];
+        var i=1;
+        console.log("foo");
+        
+        spin(i*30);
+        function spin(interval){
+            setTimeout(function(){
+                var dice = dicepos[Math.floor(Math.random()*6)];
+                $("#current-pos").text(dice);
+                if(i<15){ spin(i++*30)}else{
+                    setTimeout(function(){
+                        confirmDiceValue(dice)
+                    },500);
+                };
+                
+            },interval)
+        }
+        
+    }})
     
     $("#status").addClass("wait");
     
@@ -438,7 +482,7 @@ $(function(){
     var facial = $("input[name=facial-icon]:checked").val();
     var group = $("#input-init-groupId").val();
     
-    console.log(group);
+   
     
     if(!!val && val != ""){
         $.ajax({
