@@ -11,9 +11,15 @@
       <input type="text" name="username"><input type="submit" value="">
     </form>
     -->
+    
+    <div id="railway">
+      
+    </div>
+    
     ユーザー名きめてーや。
     <input type="text" id="input-username">
     <a href="#" id="submit">foo</a>
+    
     
     <select name="" id="station-selector">
       <option value="0" class="n0">station#0</option>
@@ -37,7 +43,10 @@
     
     <input type="text" id="groupId">
     <a href="#" id="addGroup">addGroup</a>
+    <a href="#" id="getfromgroupId">groupIdから取得</a>
     
+    
+   
     
     <script>
       $(function(){
@@ -93,6 +102,27 @@
               });
            }
          }})
+         
+         
+         
+          $("#getfromgroupId").on({"click":function(){
+           var val = $("#groupId").val();
+           if(!!val && val != ""){
+             $.ajax({
+                type: "POST",
+                url: "/getgroup",
+                data: {
+                  "_id" : userdata.uuid,
+                  "groupId" : val
+                },
+                success: function(data){
+                  console.log(data);
+                }
+              });
+           }
+         }})
+         
+         
       });
     </script>
   </body>

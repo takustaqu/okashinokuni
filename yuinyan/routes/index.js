@@ -69,7 +69,7 @@ router.post('/checkin', function(req, res){
     });
 });
 
-//チェックイン処理
+//グループ参加機能
 router.post('/addgroup', function(req, res){
     
     MongoClient.connect(mongoPath, function(err, db) {
@@ -86,6 +86,24 @@ router.post('/addgroup', function(req, res){
           });
           
         });
+      });
+    });
+});
+
+//グループでの取得
+router.post('/getgroup', function(req, res){
+    console.log(!!req.body&&!!req.body.groupId);
+    MongoClient.connect(mongoPath, function(err, db) {
+      //assert.equal(null, err);
+      var result = [];
+      var cursor = db.collection('user').find({"groupId":parseInt(req.body.groupId)});
+      cursor.each(function(err, doc) {
+          assert.equal(err, null);
+          if (doc != null) {
+            result.push(doc);
+          } else {
+            res.json(result);
+          }
       });
     });
 });
