@@ -341,3 +341,8 @@ header#global {
 	position: relative;
 	display: none;
 }
+
+#station-selector , #checkin {
+	position: relative;
+	z-index:3000;
+}

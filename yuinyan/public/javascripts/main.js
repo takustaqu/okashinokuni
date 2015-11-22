@@ -348,7 +348,9 @@ function restore(){
     var checked = calcCheckedStation(data.checkin);
     $("#counter .number").text(checked.stations - checked.checked);
     
-    $stations.children("li").each(function(i){
+    
+    
+    $($stations.children("li").get().reverse()).each(function(i){
        
         if(data.checkin[i]>0){
             $(this).addClass("checked");
@@ -358,6 +360,8 @@ function restore(){
         if(data.checkin[i]>1){
             $(this).find(".station-circle").html('<span>'+data.checkin[i]+'</span>');
         }
+        
+        $(this).find(".buddy").empty();
     })
     
     if(!!data.groupId){
@@ -372,10 +376,17 @@ function restore(){
             $groupPlayers.append(
                 $("<li />").html('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar type'+( '0'+this.groupId ).slice(-2)+'"><span class="name">'+this.username+'</span>')
             );
+            var current = this.currentStation;
+            var groupId = this.groupId;
             
+            $stations.children("li").each(function(i){
+                console.log(parseInt($(this).attr("data-station-id")) , current);
+                if(parseInt($(this).attr("data-station-id")) == current){
+                    $(this).find(".buddy").append($("<span />").addClass('type'+( '0'+groupId ).slice(-2)).text("●"))
+                }
+            });
+             
         });
-        
-        var $group = $("<ul />")
     }
     
     
