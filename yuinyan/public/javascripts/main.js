@@ -304,6 +304,7 @@ function confirmDiceValue(int){
     
     $("#diceboard").slideUp();
 }
+
     
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
     // 引数　precision は小数点以下の桁数（距離の精度）
@@ -371,9 +372,10 @@ function calcCheckedStation(list){
 function restore(){
     
     var data = getDataFromUuid(userdata.uuid);
-    console.log(data,data.name);
-    
+    // if(!data ||r !data.name) return false;
+    console.log(data);
     $("#dashboard h1 .name").text(data.username);
+    $("#dashboard h1 img").removeClass().addClass("avatar type"+(("0"+data.facial).slice(-2)));
     
     var checked = calcCheckedStation(data.checkin);
     $("#counter .number").text(checked.stations - checked.checked);
@@ -402,19 +404,20 @@ function restore(){
         $("#group-detail .group-id").text("グループID:"+data.groupId); 
         
         var groupData = getGroupsFromGid(data.groupId);
+        var facial = data.facial;
         
         $groupPlayers.empty();
         
         $.each(groupData,function(){
             $groupPlayers.append(
-                $("<li />").html('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar type'+( '0'+this.groupId ).slice(-2)+'"><span class="name">'+this.username+'</span>')
+                $("<li />").html('<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar type'+( '0'+this.facial ).slice(-2)+'"><span class="name">'+this.username+'</span>')
             );
             var current = this.currentStation;
             var groupId = this.groupId;
             
             $stations.children("li").each(function(i){
                 if(parseInt($(this).attr("data-station-id")) == current){
-                    $(this).find(".buddy").append($("<span />").addClass('type'+( '0'+groupId ).slice(-2)).text("●"))
+                    $(this).find(".buddy").append($("<span />").addClass('type'+( '0'+facial ).slice(-2)).text("●"))
                 }
             });
              
@@ -494,6 +497,14 @@ $(function(){
         }
          
      }})
+     
+     $("#status .throwdice a").on({"click":function(){
+         $("#diceboard").slideDown
+        
+         
+     }})
+     
+
     $("#do-dice").on({"click":function(){
         var dicepos = [1,2,3,4,5,6];
         var i=1;

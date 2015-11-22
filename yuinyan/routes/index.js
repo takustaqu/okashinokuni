@@ -47,6 +47,7 @@ router.post('/getuserdata', function(req, res){
     MongoClient.connect(mongoPath, function(err, db) {
       assert.equal(null, err);
       db.collection('user').findOne({"_id":new ObjectID(req.body._id)},function(data,result){
+        console.log(result)
         res.json(result);
       });
     });
