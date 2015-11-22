@@ -209,7 +209,7 @@ $(function(){
     $.each(stations,function(i){
         $distances[i] = $("<span />").text(0);
         
-        var $tmp = $("<li />").attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
+        var $tmp = $("<li />").addClass("station-id-"+this.num).attr({"data-station-id":this.num,"data-lat":this.latitude[0],"data-lon":this.latitude[1]}).html(
             '<span class="buddy"><span style="color:red">●</span><span style="color:green">●</span><span style="color:blue">●</span></span><span class="station-circle"></span><span class="station-name">'+ this.name +'</span><span class="distance"></span>');
             
         $stationLabels.push($tmp);
@@ -302,7 +302,7 @@ function geoDistance(lat1, lng1, lat2, lng2, precision) {
     return distance;
 }
     
-function restore(uuid){
+function getDataFromUuid(uuid){
 	 var result = $.ajax({
         type: "POST",
         url: "/getuserdata",
@@ -314,6 +314,65 @@ function restore(uuid){
     return JSON.parse(result);
 }
 
+function getGroupsFromGid(gid){
+	 var result = $.ajax({
+        type: "POST",
+        url: "/getgroup",
+        data: {
+            "groupId" : gid
+        },
+        async: false
+    }).responseText;
+    return JSON.parse(result);
+}
+
+
+function calcCheckedStation(list){
+    
+    var checked = 0;
+    $.each(list,function(){
+         if(this>0){ checked++ }
+    });
+    
+    return {stations:list.length,checked:checked};
+}
+
+function restore(){
+    
+    var data = getDataFromUuid(userdata.uuid);
+    console.log(data,data.name);
+    
+    $("#dashboard h1 .name").text(data.username);
+    
+    var checked = calcCheckedStation(data.checkin);
+    $("#counter .number").text(checked.stations - checked.checked);
+    
+    $stations.children("li").each(function(i){
+        
+        console.log(i,data.checkin[i],this)
+        if(data.checkin[i]>0){
+            console.log("チェック対象",i)
+            $(this).addClass("checked");
+        }else{
+            $(this).removeClass("checked").find(".station-circle").html("");
+        }
+        if(data.checkin[i]>1){
+            console.log("チェック対象-複数カウント",i)
+            $(this).find(".station-circle").html('<span>'+data.checkin[i]+'</span>');
+        }
+    })
+    
+    if(!!data.groupId){
+        $("#group-detail").slideDown();
+        $("#group-detail .group-id").text("グループID:"+data.groupId); 
+        
+        var groupData = getGroupsFromGid(data.groupId);
+        
+        var $group = $("<ul />")
+    }
+    
+    
+}
 
 setInterval(function(){
     refreshGeolocation();
@@ -343,6 +402,12 @@ function refreshStationDistance(){
 /**/
 
 $(function(){
+    
+    if(!!userdata.uuid) {//ユーザーデータがある場合はサインアップをキャンセル
+        $("#createuser").slideUp();
+        restore();
+    }
+    
     $("#submit").on({"click":function(){
     var val = $("#input-username").val();
     var facial = $("input[name=facial-icon]:checked").val();
@@ -406,6 +471,8 @@ $(function(){
         });
     }
     }})
+    
+    
     
     
     

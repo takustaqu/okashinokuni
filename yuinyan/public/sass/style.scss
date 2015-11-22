@@ -159,6 +159,12 @@ header#global {
 			}
 		}
 		
+		&.checked {
+			.station-circle {
+				background-color:red;
+			}
+		}
+		
 		&.near {
 			.station-circle {
 				border-color:green;
