@@ -232,8 +232,8 @@ var Geokit = function(callback) {
 
 Geokit.prototype.done = function(pos) {
 this.status = "success";
-console.log(this.status, this);
-console.log("done:", pos, status);
+// console.log(this.status, this);
+// console.log("done:", pos, status);
 this.result = pos;
 }
 
